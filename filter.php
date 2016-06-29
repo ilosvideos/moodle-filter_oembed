@@ -132,6 +132,10 @@ class filter_oembed extends moodle_text_filter {
             $search = '/<a\s[^>]*href="(https?:\/\/(www\.)?)(sway\.com)\/(.*?)"(.*?)>(.*?)<\/a>/is';
             $newtext = preg_replace_callback($search, 'filter_oembed_swaycallback', $newtext);
         }
+        if (get_config('filter_oembed', 'ilos')) {
+            $search = '/<a\s[^>]*href="(https?:\/\/(www\.|app\.)?)(ilos\.video|ilosvideos\.com\/view)\/(.*?)"(.*?)>(.*?)<\/a>/is';
+            $newtext = preg_replace_callback($search, 'filter_oembed_iloscallback', $newtext);
+        }
 
         // New method for embed providers.
         $providers = static::get_supported_providers();
@@ -278,6 +282,19 @@ function filter_oembed_issuucallback($link) {
 function filter_oembed_soundcloudcallback($link) {
     global $CFG;
     $url = "http://soundcloud.com/oembed?url=".trim($link[1]).trim($link[3]).'/'.trim($link[4])."&format=json&maxwidth=480&maxheight=270'";
+    $json = filter_oembed_curlcall($url);
+    return filter_oembed_vidembed($json);
+}
+
+/**
+ * Looks for links pointing to ilos content and processes them.
+ *
+ * @param $link HTML tag containing a link
+ * @return string HTML content after processing.
+ */
+function filter_oembed_iloscallback($link) {
+    global $CFG;
+    $url = "https://app.ilosvideos.com/oembed?url=".trim($link[1]).trim($link[3]).'/'.trim($link[4])."&format=json'";
     $json = filter_oembed_curlcall($url);
     return filter_oembed_vidembed($json);
 }

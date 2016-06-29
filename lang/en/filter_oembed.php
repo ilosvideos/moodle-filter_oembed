@@ -33,6 +33,7 @@ $string['slideshare'] = 'SlideShare';
 $string['officemix'] = 'Office Mix';
 $string['issuu'] = 'Issuu';
 $string['soundcloud'] = 'SoundCloud';
+$string['ilos'] = 'ilos';
 $string['pollev'] = 'Poll Everywhere';
 $string['sway'] = 'Sway';
 $string['once'] = 'Once';

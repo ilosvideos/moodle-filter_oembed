@@ -34,6 +34,7 @@ $string['officemix'] = 'Office Mix';
 $string['issuu'] = 'Issuu';
 $string['screenr'] = 'Screenr';
 $string['soundcloud'] = 'SoundCloud';
+$string['ilos'] = 'ilos';
 $string['pollev'] = 'Poll Everywhere';
 $string['lazyload'] = 'Delay Embed Loading (Lazyload)';
 $string['connection_error'] = 'Fehler beim Zugriff auf die integrierten Medien. Versuchen Sie, die Seite zu aktualisieren.';

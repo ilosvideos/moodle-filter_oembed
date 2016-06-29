@@ -45,6 +45,8 @@ if ($ADMIN->fulltree) {
     $settings->add($item);
     $item = new admin_setting_configselect('filter_oembed/soundcloud', new lang_string('soundcloud', 'filter_oembed'), '', 1, $torf);
     $settings->add($item);
+    $item = new admin_setting_configselect('filter_oembed/ilos', new lang_string('ilos', 'filter_oembed'), '', 1, $torf);
+    $settings->add($item);
     $item = new admin_setting_configselect('filter_oembed/pollev', new lang_string('pollev', 'filter_oembed'), '', 1, $torf);
     $settings->add($item);
     $item = new admin_setting_configselect('filter_oembed/o365video', new lang_string('o365video', 'filter_oembed'), '', 1, $torf);
