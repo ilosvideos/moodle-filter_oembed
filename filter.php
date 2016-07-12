@@ -167,7 +167,7 @@ class filter_oembed extends moodle_text_filter {
      */
     public static function get_supported_providers() {
         return [
-            'docsdotcom', 'powerbi'
+//            'docsdotcom', 'powerbi'
         ];
     }
 }
@@ -294,9 +294,33 @@ function filter_oembed_soundcloudcallback($link) {
  */
 function filter_oembed_iloscallback($link) {
     global $CFG;
-    $url = "https://app.ilosvideos.com/oembed?url=".trim($link[1]).trim($link[3]).'/'.trim($link[4])."&format=json'";
-    $json = filter_oembed_curlcall($url);
-    return filter_oembed_vidembed($json);
+//    $url = "https://app.ilosvideos.com/oembed?url=".trim($link[1]).trim($link[3]).'/'.trim($link[4])."&format=json'";
+    $url = trim($link[1]).trim($link[3]).'/'.trim($link[4]);
+
+    if($link[3] == "ilos.video") {
+        $url = ilos_shortlink_parser($url);
+    }
+
+    if(strpos($url, 'view/') > 0)
+    {
+        $randtag = substr($url, strpos($url, 'view/') + 5);
+    }
+    else if(strpos($url, 'video/') > 0)
+    {
+        // accessError/video
+        $randtag = substr($url, strpos($url, 'video/')+6);
+    }
+    else
+    {
+        return "This video has been removed.";
+    }
+
+    if (strpos($randtag, '/')) $randtag = substr($randtag, 0, strpos($randtag, '/'));
+    $iframeUrl = '<iframe width="640" height="360" allowTransparency="true" mozallowfullscreen webkitallowfullscreen allowfullscreen style="background-color:transparent;" frameBorder="0" src="https://app.ilosvideos.com/embed/'.$randtag.'"></iframe>';
+
+//    $json = filter_oembed_curlcall($url, true);
+//    return filter_oembed_vidembed($json);
+    return $iframeUrl;
 }
 
 /**
@@ -396,14 +420,14 @@ function filter_oembed_swaycallback($link) {
  * @param $url URL for the Oembed request
  * @return mixed|null|string The HTTP response object from the OEmbed request.
  */
-function filter_oembed_curlcall($url) {
+function filter_oembed_curlcall($url, $noCache = false) {
    static $cache;
 
     if (!isset($cache)) {
         $cache = cache::make('filter_oembed', 'embeddata');
     }
 
-    if ($ret = $cache->get(md5($url))) {
+    if (!$noCache && $ret = $cache->get(md5($url))) {
         return json_decode($ret, true);
     }
 
@@ -427,9 +451,32 @@ function filter_oembed_curlcall($url) {
         }
     }
 
-    $cache->set(md5($url), $ret);
+    if(!$noCache) $cache->set(md5($url), $ret);
     $result = json_decode($ret, true);
     return $result;
+}
+
+function ilos_shortlink_parser($url) {
+
+//    $curl = new \curl();
+//    $ret = $curl->get($url);
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_HEADER, TRUE);
+    curl_setopt($ch, CURLOPT_NOBODY, TRUE); // remove body
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
+    $head = curl_exec($ch);
+    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+    $last_url = curl_getinfo($ch, CURLINFO_EFFECTIVE_URL);
+
+    curl_close($ch);
+
+//    $result = json_decode($ret, true);
+
+    return $last_url;
 }
 
 /**

@@ -31,28 +31,28 @@ require_once(__DIR__.'/filter.php');
 
 if ($ADMIN->fulltree) {
     $torf = array('1' => new lang_string('yes'), '0' => new lang_string('no'));
-    $item = new admin_setting_configselect('filter_oembed/youtube', new lang_string('youtube', 'filter_oembed'), '', 1, $torf);
-    $settings->add($item);
-    $item = new admin_setting_configselect('filter_oembed/vimeo', new lang_string('vimeo', 'filter_oembed'), '', 1, $torf);
-    $settings->add($item);
-    $item = new admin_setting_configselect('filter_oembed/ted', new lang_string('ted', 'filter_oembed'), '', 1, $torf);
-    $settings->add($item);
-    $item = new admin_setting_configselect('filter_oembed/slideshare', new lang_string('slideshare', 'filter_oembed'), '', 1, $torf);
-    $settings->add($item);
-    $item = new admin_setting_configselect('filter_oembed/officemix', new lang_string('officemix', 'filter_oembed'), '', 1, $torf);
-    $settings->add($item);
-    $item = new admin_setting_configselect('filter_oembed/issuu', new lang_string('issuu', 'filter_oembed'), '', 1, $torf);
-    $settings->add($item);
-    $item = new admin_setting_configselect('filter_oembed/soundcloud', new lang_string('soundcloud', 'filter_oembed'), '', 1, $torf);
-    $settings->add($item);
+//    $item = new admin_setting_configselect('filter_oembed/youtube', new lang_string('youtube', 'filter_oembed'), '', 1, $torf);
+//    $settings->add($item);
+//    $item = new admin_setting_configselect('filter_oembed/vimeo', new lang_string('vimeo', 'filter_oembed'), '', 1, $torf);
+//    $settings->add($item);
+//    $item = new admin_setting_configselect('filter_oembed/ted', new lang_string('ted', 'filter_oembed'), '', 1, $torf);
+//    $settings->add($item);
+//    $item = new admin_setting_configselect('filter_oembed/slideshare', new lang_string('slideshare', 'filter_oembed'), '', 1, $torf);
+//    $settings->add($item);
+//    $item = new admin_setting_configselect('filter_oembed/officemix', new lang_string('officemix', 'filter_oembed'), '', 1, $torf);
+//    $settings->add($item);
+//    $item = new admin_setting_configselect('filter_oembed/issuu', new lang_string('issuu', 'filter_oembed'), '', 1, $torf);
+//    $settings->add($item);
+//    $item = new admin_setting_configselect('filter_oembed/soundcloud', new lang_string('soundcloud', 'filter_oembed'), '', 1, $torf);
+//    $settings->add($item);
     $item = new admin_setting_configselect('filter_oembed/ilos', new lang_string('ilos', 'filter_oembed'), '', 1, $torf);
     $settings->add($item);
-    $item = new admin_setting_configselect('filter_oembed/pollev', new lang_string('pollev', 'filter_oembed'), '', 1, $torf);
-    $settings->add($item);
-    $item = new admin_setting_configselect('filter_oembed/o365video', new lang_string('o365video', 'filter_oembed'), '', 1, $torf);
-    $settings->add($item);
-    $item = new admin_setting_configselect('filter_oembed/sway', new lang_string('sway', 'filter_oembed'), '', 1, $torf);
-    $settings->add($item);
+//    $item = new admin_setting_configselect('filter_oembed/pollev', new lang_string('pollev', 'filter_oembed'), '', 1, $torf);
+//    $settings->add($item);
+//    $item = new admin_setting_configselect('filter_oembed/o365video', new lang_string('o365video', 'filter_oembed'), '', 1, $torf);
+//    $settings->add($item);
+//    $item = new admin_setting_configselect('filter_oembed/sway', new lang_string('sway', 'filter_oembed'), '', 1, $torf);
+//    $settings->add($item);
 
     // New provider method.
     $providers = \filter_oembed::get_supported_providers();
@@ -63,8 +63,9 @@ if ($ADMIN->fulltree) {
         $settings->add($item);
     }
 
-    $item = new admin_setting_configcheckbox('filter_oembed/lazyload', new lang_string('lazyload', 'filter_oembed'), '', 0);
-    $settings->add($item);
+//    $item = new admin_setting_configcheckbox('filter_oembed/lazyload', new lang_string('lazyload', 'filter_oembed'), '', 0);
+//    $settings->add($item);
+
     $retrylist = array('0' => new lang_string('none'), '1' => new lang_string('once', 'filter_oembed'),
                                                   '2' => new lang_string('times', 'filter_oembed', '2'),
                                                   '3' => new lang_string('times', 'filter_oembed', '3'));
