@@ -1,3 +1,5 @@
+**This repository has been deprecated in favor of https://github.com/ilosvideos/ilosOembedMoodle**
+
 Description:
 This is a text filter for Moodle that converts urls from many different media sites into embeded content.
 Embed code is retrieved from the original site so should work even if the site changes embed format.
